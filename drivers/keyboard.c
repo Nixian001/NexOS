@@ -198,20 +198,8 @@ static uint8_t last_scancode = 0;
 
 static void keyboard_callback(registers_t *regs) {
     uint8_t scancode = port_byte_in(0x60);
-
-    // Ignore repeated scancode (prevents stuck key)
-    if (scancode == last_scancode) {
-        port_byte_out(0x20, 0x20);
-        return;
-    }
-    last_scancode = scancode;
-
-    if (!(scancode & 0x80)) { // key press
-        print_letter(scancode);
-        print_nl();
-    }
-
-    port_byte_out(0x20, 0x20);
+    print_letter(scancode);
+    print_nl();
 }
 
 void init_keyboard() {
