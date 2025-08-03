@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdbool.h>
 
 void memory_copy(uint8_t *source, uint8_t *dest, uint32_t nbytes) {
     int i;
@@ -11,6 +12,22 @@ int string_length(char s[]) {
     int i = 0;
     while (s[i] != '\0') ++i;
     return i;
+}
+
+void append(char s[], char n) {
+    int len = string_length(s);
+    s[len] = n;
+    s[len + 1] = '\0';
+}
+
+bool backspace(char buffer[]) {
+    int len = string_length(buffer);
+    if (len > 0) {
+        buffer[len - 1] = '\0';
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void reverse(char s[]) {

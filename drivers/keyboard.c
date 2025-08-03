@@ -2,7 +2,31 @@
 #include "ports.h"
 #include "../cpu/isr.h"
 #include "display.h"
+#include "shell.h"
 #include "../kernel/util.h"
+
+static char key_buffer[256];
+
+// const char scancode_to_char[] = {
+//     '?', '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=',
+//     '?', '?', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']',
+//     '?', '?', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', '#',
+//    '?', '\\', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '?',
+//                 '?', '?', ' '
+// };
+
+const char scancode_to_char[] = {
+  '?', '`', '1', '2', '3', '4', '5',
+  '6', '7', '8', '9', '0', '-', '=',
+  '?', '?', 'Q', 'W', 'E', 'R', 'T',
+  'Y', 'U', 'I', 'O', 'P', '[', ']',
+  '?', '?', 'A', 'S', 'D', 'F', 'G',
+  'H', 'J', 'K', 'L', ';', '\'', '#',
+  '?', '\\', 'Z', 'X', 'C', 'V', 'BW',
+  'N', 'M', ',', '.', '/', '?', '?',
+  '?', ' '
+};
+
 
 void print_letter(uint8_t scancode) {
     switch (scancode) {
@@ -194,12 +218,25 @@ void print_letter(uint8_t scancode) {
     }
 }
 
-static uint8_t last_scancode = 0;
-
 static void keyboard_callback(registers_t *regs) {
     uint8_t scancode = port_byte_in(0x60);
-    print_letter(scancode);
-    print_nl();
+
+    if (scancode > SC_MAX) return;
+
+    if (scancode == BACKSPACE) {
+        if (backspace(key_buffer)) {
+            print_backspace();
+        }
+    } else if (scancode == ENTER) {
+        print_nl();
+        execute_command(key_buffer);
+        key_buffer[0] = '\0';
+    } else {
+        char letter = scancode_to_char[(int) scancode];
+        append(key_buffer, letter);
+        char str[2] = {letter, '\0'};
+        print_string(str);
+    }
 }
 
 void init_keyboard() {
