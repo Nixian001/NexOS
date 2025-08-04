@@ -41,17 +41,17 @@ void main() {
     clear_screen();
 
     print_nl();
-    print_string("  888b    |                      ,88~-_   ,d88~~\\");
+    print_string("  88b    |                    ,88~-_   ,d8~~\\");
     print_nl();
-    print_string("  |Y88b   |  e88~~8e  Y88b  /   d888   \\  8888   ");
+    print_string("  |Y8b   |  e8~~8e  Y8b  /   d88    \\  888   ");
     print_nl();
-    print_string("  | Y88b  | d888  88b  Y88b/   88888    | `Y88b  ");
+    print_string("  | Y8b  | d88  88b  Y8b/   8888     | `Y8b  ");
     print_nl();
-    print_string("  |  Y88b | 8888__888   Y88b   88888    |  `Y88b,");
+    print_string("  |  Y8b | 888__888   Y8b   8888     |  `Y8b,");
     print_nl();
-    print_string("  |   Y88b| Y888    ,   /Y88b   Y888   /     8888");
+    print_string("  |   Y8b| Y88    ,   /Y8b   Y88    /     888");
     print_nl();
-    print_string("  |    Y888  \"88___/   /  Y88b   `88_-~   \\__88P'");
+    print_string("  |    Y88  \"8___/   /  Y8b   `88_-~   \\__8P'");
     print_nl();
     print_nl();
     print_nl();
