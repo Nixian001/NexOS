@@ -8,6 +8,10 @@ void execute_command(char *input) {
         asm volatile("hlt");
     }
 
+    else if (compare_string(input, "CLS") == 0) {
+        clear_screen();
+    }
+
     else {
         print_string("Unknown command: ");
         print_string(input);

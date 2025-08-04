@@ -7,6 +7,8 @@
 #include "util.h"
 #include "mem.h"
 
+
+
 void* alloc(int n) {
     int *ptr = (int *) mem_alloc(n * sizeof(int));
     if (ptr == NULL_POINTER) {
@@ -28,6 +30,7 @@ void* alloc(int n) {
 }
 
 void main() {
+
     clear_screen();
     print_string("Installing interrupt service routines (ISRs).\n");
     isr_install();
