@@ -1,6 +1,6 @@
 #include "timer.h"
-#include "../drivers/display.h"
-#include "../drivers/ports.h"
+#include "../drivers/display/display.h"
+#include "../drivers/ports/ports.h"
 #include "../kernel/util.h"
 #include "isr.h"
 

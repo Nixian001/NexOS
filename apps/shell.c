@@ -1,4 +1,4 @@
-#include "../drivers/display.h"
+#include "../drivers/display/display.h"
 #include "../kernel/util.h"
 #include "shell.h"
 

@@ -1,7 +1,7 @@
-#include "display.h"
-#include "ports.h"
+#include "../display/display.h"
+#include "../ports/ports.h"
 #include <stdint.h>
-#include "../kernel/util.h"
+#include "../../kernel/util.h"
 
 void set_cursor(int offset) {
     offset /= 2;

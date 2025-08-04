@@ -1,9 +1,9 @@
-#include "keyboard.h"
-#include "ports.h"
-#include "../cpu/isr.h"
-#include "display.h"
-#include "../apps/shell.h"
-#include "../kernel/util.h"
+#include "../keyboard/keyboard.h"
+#include "../ports/ports.h"
+#include "../../cpu/isr.h"
+#include "../display/display.h"
+#include "../../apps/shell.h"
+#include "../../kernel/util.h"
 
 static char key_buffer[256];
 
