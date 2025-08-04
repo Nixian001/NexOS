@@ -2,3 +2,5 @@
 *.o
 *.dis
 *.elf
+**/.vscode/
+**/.VSCodeCounter/
