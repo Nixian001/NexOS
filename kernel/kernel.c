@@ -53,7 +53,9 @@ void main() {
     print_nl();
     print_string("  |    Y88  \"8___/   /  Y8b   `88_-~   \\__8P'");
     print_nl();
+    print_string(" ==> : Budapest Edition");
     print_nl();
+    print_string("       ~~~~~~~~~~~~~~~~");
     print_nl();
 
     print_string("> ");
