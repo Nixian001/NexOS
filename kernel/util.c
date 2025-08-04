@@ -1,13 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-void memory_copy(uint8_t *source, uint8_t *dest, uint32_t nbytes) {
-    int i;
-    for (i = 0; i < nbytes; i++) {
-        *(dest + i) = *(source + i);
-    }
-}
-
 int string_length(char s[]) {
     int i = 0;
     while (s[i] != '\0') ++i;
@@ -51,4 +44,14 @@ void int_to_string(int n, char str[]) {
     str[i] = '\0';
 
     reverse(str);
+}
+
+/* K&R
+ * Returns <0 if s1<s2, 0 if s1==s2, >0 if s1>s2 */
+int compare_string(char s1[], char s2[]) {
+    int i;
+    for (i = 0; s1[i] == s2[i]; i++) {
+        if (s1[i] == '\0') return 0;
+    }
+    return s1[i] - s2[i];
 }
