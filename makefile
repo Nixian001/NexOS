@@ -18,7 +18,7 @@ os-image.bin: boot/mbr.bin kernel.bin
 	cat $^ > $@
 
 run: os-image.bin
-	qemu-system-i386 -fda $<
+	qemu-system-i386 -fda $< -audiodev pa,id=speaker -machine pcspk-audiodev=speaker
 
 echo: os-image.bin
 	xxd $<
@@ -32,7 +32,7 @@ debug: os-image.bin kernel.elf
 	i386-elf-gdb -ex "target remote localhost:1234" -ex "symbol-file kernel.elf"
 
 %.o: %.c ${HEADERS}
-	gcc --no-pie -m32 -ffreestanding -c $< -o $@ # -g for debugging
+	gcc --no-pie -m32 -ffreestanding -c $< -lm -o $@
 
 %.o: %.asm
 	nasm $< -f elf -o $@
@@ -47,6 +47,6 @@ clean:
 	$(RM) *.bin *.o *.dis *.elf
 	$(RM) kernel/*.o
 	$(RM) boot/*.o boot/*.bin
-	$(RM) drivers/*.o
+	$(RM) drivers/*/*.o
 	$(RM) apps/*.o
 	$(RM) cpu/*.o

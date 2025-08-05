@@ -3,6 +3,7 @@
 #include "../cpu/timer.h"
 #include "../drivers/display/display.h"
 #include "../drivers/keyboard/keyboard.h"
+#include "../drivers/audio/audio.h"
 
 #include "util.h"
 #include "mem.h"
@@ -30,6 +31,9 @@ void* alloc(int n) {
 void main() {
 
     clear_screen();
+
+    init_timer(1000); // Initialize the timer with a frequency of 1000 Hz
+
     print_string("Installing interrupt service routines (ISRs).\n");
     isr_install();
 
@@ -56,6 +60,8 @@ void main() {
     print_nl();
     print_nl();
     print_nl();
+
+    nexos_boot_audio();
 
     print_string("> ");
 }
