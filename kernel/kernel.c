@@ -4,44 +4,12 @@
 #include "../drivers/display/display.h"
 #include "../drivers/keyboard/keyboard.h"
 #include "../drivers/audio/audio.h"
-
+#include "kernel_init.h"
 #include "util.h"
 #include "mem.h"
 
-void* alloc(int n) {
-    int *ptr = (int *) mem_alloc(n * sizeof(int));
-    if (ptr == NULL_POINTER) {
-        print_string("Memory not allocated.\n");
-    } else {
-        // Get the elements of the array
-        for (int i = 0; i < n; ++i) {
-//            ptr[i] = i + 1; // shorthand for *(ptr + i)
-        }
-
-        for (int i = 0; i < n; ++i) {
-//            char str[256];
-//            int_to_string(ptr[i], str);
-//            print_string(str);
-        }
-//        print_nl();
-    }
-    return ptr;
-}
-
 void main() {
-
-    clear_screen();
-
-    init_timer(1000); // Initialize the timer with a frequency of 1000 Hz
-
-    print_string("Installing interrupt service routines (ISRs).\n");
-    isr_install();
-
-    print_string("Enabling external interrupts.\n");
-    asm volatile("sti");
-
-    print_string("Initializing keyboard (IRQ 1).\n");
-    init_keyboard();
+    kernel_init();
 
     clear_screen();
 
@@ -61,7 +29,7 @@ void main() {
     print_nl();
     print_nl();
 
-    nexos_boot_audio();
+    // nexos_boot_audio();
 
     print_string("> ");
 }

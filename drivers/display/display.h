@@ -9,6 +9,9 @@
 #define REG_SCREEN_CTRL 0x3D4
 #define REG_SCREEN_DATA 0x3D5
 
+void set_char_at_video_memory(char character, int offset);
+void set_char_at_video_memory_color(char character, int offset, int color);
+
 /* Public kernel API */
 void print_string(char* string);
 void print_nl();

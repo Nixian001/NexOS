@@ -5,6 +5,9 @@
 void execute_command(char *input) {
     if (compare_string(input, "EXIT") == 0) {
         print_string("Stopping The CPU. Farewell! :3\n");
+
+        util_quit();
+
         asm volatile("hlt");
     }
 

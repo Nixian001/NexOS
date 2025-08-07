@@ -37,6 +37,12 @@ void set_char_at_video_memory(char character, int offset) {
     vga[offset + 1] = WHITE_ON_BLACK;
 }
 
+void set_char_at_video_memory_color(char character, int offset, int color) {
+    char *vga = (char*) VIDEO_ADDRESS;
+    vga[offset] = character;
+    vga[offset + 1] = color;
+}
+
 int scroll_ln(int offset) {
     memory_copy(
             (char * )(get_offset(0, 1) + VIDEO_ADDRESS),
