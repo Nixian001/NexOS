@@ -4,3 +4,5 @@
 *.elf
 **/.vscode/
 **/.VSCodeCounter/
+**/.vs/
+*.sln
