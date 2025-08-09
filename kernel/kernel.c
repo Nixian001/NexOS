@@ -4,6 +4,7 @@
 #include "../drivers/display/display.h"
 #include "../drivers/keyboard/keyboard.h"
 #include "../drivers/audio/audio.h"
+#include "../drivers/pci/pci.h"
 
 #include "util.h"
 #include "mem.h"
@@ -42,6 +43,10 @@ void main() {
 
     print_string("Initializing keyboard (IRQ 1).\n");
     init_keyboard();
+
+    clear_screen();
+
+    pci_init();
 
     clear_screen();
 

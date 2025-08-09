@@ -13,6 +13,7 @@
 void print_string(char* string);
 void print_nl();
 void print_backspace();
+void print_int(int n);
 void clear_screen();
 int scroll_ln(int offset);
 

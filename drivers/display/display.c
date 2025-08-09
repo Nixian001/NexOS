@@ -1,6 +1,7 @@
 #include "../display/display.h"
 #include "../ports/ports.h"
 #include <stdint.h>
+#include "../../kernel/mem.h"
 #include "../../kernel/util.h"
 
 void set_cursor(int offset) {
@@ -85,6 +86,13 @@ void print_backspace() {
     int newCursor = get_cursor() - 2;
     set_char_at_video_memory(' ', newCursor);
     set_cursor(newCursor);
+}
+
+void print_int(int n) {
+    char *str = mem_alloc(12 * sizeof(char)); // Enough for 32-bit int
+    int_to_string(n, str);
+    print_string(str);
+    mem_free(str);
 }
 
 void clear_screen() {
