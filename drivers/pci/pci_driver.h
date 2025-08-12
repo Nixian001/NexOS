@@ -51,7 +51,7 @@
 #define PCI_BAR_64                      0x04
 #define PCI_BAR_PREFETCH                0x08
 
-typedef struct {
+typedef struct pci_bar {
     union {
         void *address;
         uint16_t port;
@@ -60,7 +60,7 @@ typedef struct {
     uint32_t flags; // Flags for the BAR (I/O, Memory, etc.)
 } pci_bar;
 
-typedef struct {
+typedef struct pci_device_info {
     uint16_t vendor_id;        // Vendor ID
     uint16_t device_id;        // Device ID
     uint8_t class_code;        // Class code
@@ -68,7 +68,7 @@ typedef struct {
     uint8_t prog_intf;         // Programming interface
 } pci_device_info;
 
-typedef struct {
+typedef struct pci_driver {
     void (*init)(uint32_t id, pci_device_info *info);
 } pci_driver;
 

@@ -25,11 +25,11 @@ echo: os-image.bin
 
 # only for debug
 kernel.elf: boot/kernel_entry.o ${OBJ_FILES}
-	i386-elf-ld -m elf_i386 -o $@ -Ttext 0x1000 $^
+	ld -m elf_i386 -o $@ -Ttext 0x1000 $^
 
 debug: os-image.bin kernel.elf
 	qemu-system-i386 -s -S -fda os-image.bin -d guest_errors,int -no-reboot -no-shutdown
-	i386-elf-gdb -ex "target remote localhost:1234" -ex "symbol-file kernel.elf"
+	gdb -ex "target remote localhost:1234" -ex "symbol-file kernel.elf"
 
 %.o: %.c ${HEADERS}
 	gcc --no-pie -m32 -ffreestanding -c $< -lm -o $@

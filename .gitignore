@@ -6,3 +6,5 @@
 **/.VSCodeCounter/
 **/.vs/
 *.sln
+.obsidian
+*.vscode

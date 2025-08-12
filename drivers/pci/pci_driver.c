@@ -2,9 +2,11 @@
 
 #include "../../kernel/util.h"
 #include "../ports/ports.h"
+#include "../usb/ehci.h"
 
 const pci_driver pci_driver_table[] = {
     // Add PCI drivers here
+    { ehci_init },
     { 0 },
 };
 
