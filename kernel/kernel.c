@@ -4,30 +4,9 @@
 #include "../drivers/display/display.h"
 #include "../drivers/keyboard/keyboard.h"
 #include "../drivers/audio/audio.h"
-#include "../drivers/pci/pci.h"
 
 #include "util.h"
 #include "mem.h"
-
-void* alloc(int n) {
-    int *ptr = (int *) mem_alloc(n * sizeof(int));
-    if (ptr == NULL_POINTER) {
-        print_string("Memory not allocated.\n");
-    } else {
-        // Get the elements of the array
-        for (int i = 0; i < n; ++i) {
-//            ptr[i] = i + 1; // shorthand for *(ptr + i)
-        }
-
-        for (int i = 0; i < n; ++i) {
-//            char str[256];
-//            int_to_string(ptr[i], str);
-//            print_string(str);
-        }
-//        print_nl();
-    }
-    return ptr;
-}
 
 void main() {
 
@@ -46,21 +25,12 @@ void main() {
 
     clear_screen();
 
-    pci_init();
-
-    clear_screen();
-
     print_nl();
-    print_string("  88b    |                    ,88~-_   ,d8~~\\");
-    print_nl();
-    print_string("  |Y8b   |  e8~~8e  Y8b  /   d88    \\  888   ");
-    print_nl();
-    print_string("  | Y8b  | d88  88b  Y8b/   8888     | `Y8b  ");
-    print_nl();
-    print_string("  |  Y8b | 888__888   Y8b   8888     |  `Y8b,");
-    print_nl();
-    print_string("  |   Y8b| Y88    ,   /Y8b   Y88    /     888");
-    print_nl();
+    print_string("  88b    |                    ,88~-_   ,d8~~\\"); print_nl();
+    print_string("  |Y8b   |  e8~~8e  Y8b  /   d88    \\  888   "); print_nl();
+    print_string("  | Y8b  | d88  88b  Y8b/   8888     | `Y8b  "); print_nl();
+    print_string("  |  Y8b | 888__888   Y8b   8888     |  `Y8b,"); print_nl();
+    print_string("  |   Y8b| Y88    ,   /Y8b   Y88    /     888"); print_nl();
     print_string("  |    Y88  \"8___/   /  Y8b   `88_-~   \\__8P'");
     print_nl();
     print_nl();
