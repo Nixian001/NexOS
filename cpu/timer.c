@@ -22,9 +22,9 @@ void init_timer(uint32_t freq) {
     uint8_t low  = (uint8_t)(divisor & 0xFF);
     uint8_t high = (uint8_t)( (divisor >> 8) & 0xFF);
     /* Send the command */
-    port_byte_out(0x43, 0x36); /* Command port */
-    port_byte_out(0x40, low);
-    port_byte_out(0x40, high);
+    port_byte_out_8(0x43, 0x36); /* Command port */
+    port_byte_out_8(0x40, low);
+    port_byte_out_8(0x40, high);
 }
 
 void timer_sleep(uint16_t ms) {

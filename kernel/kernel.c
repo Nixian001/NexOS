@@ -4,6 +4,7 @@
 #include "../drivers/display/display.h"
 #include "../drivers/keyboard/keyboard.h"
 #include "../drivers/audio/audio.h"
+#include "../drivers/pci/pci.h"
 
 #include "util.h"
 #include "mem.h"
@@ -23,20 +24,25 @@ void main() {
     print_string("Initializing keyboard (IRQ 1).\n");
     init_keyboard();
 
+    print_string("Initializing PCI devices.\n");
+    pci_init();
+
     clear_screen();
 
     print_nl();
-    print_string("  88b    |                    ,88~-_   ,d8~~\\"); print_nl();
-    print_string("  |Y8b   |  e8~~8e  Y8b  /   d88    \\  888   "); print_nl();
-    print_string("  | Y8b  | d88  88b  Y8b/   8888     | `Y8b  "); print_nl();
-    print_string("  |  Y8b | 888__888   Y8b   8888     |  `Y8b,"); print_nl();
-    print_string("  |   Y8b| Y88    ,   /Y8b   Y88    /     888"); print_nl();
-    print_string("  |    Y88  \"8___/   /  Y8b   `88_-~   \\__8P'");
-    print_nl();
+    print_string("  88b    |                    ,88~-_   ,d8~~\\");  print_nl();
+    print_string("  |Y8b   |  e8~~8e  Y8b  /   d88    \\  888   ");  print_nl();
+    print_string("  | Y8b  | d88  88b  Y8b/   8888     | `Y8b  ");   print_nl();
+    print_string("  |  Y8b | 888__888   Y8b   8888     |  `Y8b,");   print_nl();
+    print_string("  |   Y8b| Y88    ,   /Y8b   Y88    /     888");   print_nl();
+    print_string("  |    Y88  \"8___/   /  Y8b   `88_-~   \\__8P'"); print_nl();
     print_nl();
     print_nl();
 
-    nexos_boot_audio();
+    // nexos_boot_audio();
+
+    pci_dev_t dev = pci_get_device(0x0951, 0x1666, 0x08);
+    print_int(pci_read(dev, 0x00));
 
     print_string("> ");
 }

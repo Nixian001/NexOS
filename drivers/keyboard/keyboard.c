@@ -210,7 +210,7 @@ void print_letter(uint8_t scancode) {
 }
 
 static void keyboard_callback(registers_t *regs) {
-    uint8_t scancode = port_byte_in(0x60);
+    uint8_t scancode = port_byte_in_8(0x60);
 
     if (scancode > SC_MAX) return;
 
@@ -232,8 +232,8 @@ static void keyboard_callback(registers_t *regs) {
 
 void init_keyboard() {
     // Flush any leftover scancodes from the buffer
-    while (port_byte_in(0x64) & 0x01) {
-        port_byte_in(0x60);
+    while (port_byte_in_8(0x64) & 0x01) {
+        port_byte_in_8(0x60);
     }
 
     register_interrupt_handler(IRQ1, keyboard_callback);

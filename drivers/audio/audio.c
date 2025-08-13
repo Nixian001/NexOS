@@ -52,19 +52,19 @@ void play_sound(float nFrequency) {
         nFrequency = 20000.0f; // Maximum frequency
     
     div = 1193180 / nFrequency;
-    port_byte_out(0x43, 0xB6);
-    port_byte_out(0x42, (uint8_t) div);
-    port_byte_out(0x42, (uint8_t) (div >> 8));
+    port_byte_out_8(0x43, 0xB6);
+    port_byte_out_8(0x42, (uint8_t) div);
+    port_byte_out_8(0x42, (uint8_t) (div >> 8));
 
-    tmp = port_byte_in(0x61);
+    tmp = port_byte_in_8(0x61);
     if (tmp != (tmp | 3)) {
-        port_byte_out(0x61, tmp | 3);
+        port_byte_out_8(0x61, tmp | 3);
     }
 }
 
 void stop_sound() {
-    uint8_t tmp = port_byte_in(0x61) & 0xFC;
-    port_byte_out(0x61, tmp);
+    uint8_t tmp = port_byte_in_8(0x61) & 0xFC;
+    port_byte_out_8(0x61, tmp);
 }
 
 void beep() {

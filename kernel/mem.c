@@ -174,3 +174,11 @@ void mem_free(void *p) {
     current_mem_node = merge_next_node_into_current(current_mem_node);
     merge_current_node_into_previous(current_mem_node);
 }
+
+void mem_set(void *ptr, int value, size_t num) {
+    unsigned char *p = ptr;
+    for (size_t i = 0; i < num; i++) {
+        p[i] = (unsigned char)value;
+    }
+    return ptr;
+}

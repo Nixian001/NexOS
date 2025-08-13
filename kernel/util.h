@@ -7,8 +7,9 @@
 #define high_16(address) (uint16_t)(((address) >> 16) & 0xFFFF)
 
 int compare_string(char s1[], char s2[]);
-
-void memory_copy(uint8_t *source, uint8_t *dest, uint32_t nbytes);
+void itoa(char *buf, unsigned long int n, int base);
+int atoi(char * string);
+char *string_copy(char *dst,const char *src);
 
 int string_length(char s[]);
 
