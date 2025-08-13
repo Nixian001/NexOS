@@ -28,7 +28,7 @@ void itoa(char *buf, unsigned long int n, int base)
     }
 }
 
-int atoi(char * string) {
+int atoi(char *string) {
     int result = 0;
     unsigned int digit;
     int sign;

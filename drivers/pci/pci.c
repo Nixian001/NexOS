@@ -8,29 +8,26 @@ pci_dev_t dev_zero= {0};
  * Given a pci device(32-bit vars containing info about bus, device number, and function number), a field(what u want to read from the config space)
  * Read it for me !
  * */
-uint32_t pci_read(pci_dev_t dev, uint32_t field) {
-	// Only most significant 6 bits of the field
-	dev.field_num = (field & 0xFC) >> 2;
-	dev.enable = 1;
-	port_word_out_32(PCI_CONFIG_ADDRESS, dev.bits);
+uint32_t pci_read(pci_dev_t dev, uint32_t field)
+{
+    uint32_t address = (1U << 31)           // enable bit
+                     | (dev.bus_num << 16)
+                     | (dev.device_num << 11)
+                     | (dev.function_num << 8)
+                     | (field & 0xFC);
 
-	// What size is this field supposed to be ?
-	uint32_t size = pci_size_map[field];
-	if(size == 1) {
-		// Get the first byte only, since it's in little endian, it's actually the 3rd byte
-		uint8_t t = port_byte_in_8(PCI_CONFIG_DATA + (field & 3));
-		return t;
-	}
-	else if(size == 2) {
-		uint16_t t = port_bytes_in_16(PCI_CONFIG_DATA + (field & 2));
-		return t;
-	}
-	else if(size == 4){
-		// Read entire 4 bytes
-		uint32_t t = port_bytes_in_32(PCI_CONFIG_DATA);
-		return t;
-	}
-	return 0xffff;
+    port_word_out_32(PCI_CONFIG_ADDRESS, address);
+
+    uint32_t size = pci_size_map[field];  // keep your existing size map
+
+    if(size == 1) {
+        return port_byte_in_8(PCI_CONFIG_DATA + (field & 3));
+    } else if(size == 2) {
+        return port_bytes_in_16(PCI_CONFIG_DATA + (field & 2));
+    } else if(size == 4) {
+        return port_bytes_in_32(PCI_CONFIG_DATA);
+    }
+    return 0xFFFFFFFF;
 }
 
 /*

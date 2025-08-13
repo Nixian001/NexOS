@@ -18,7 +18,14 @@ os-image.bin: boot/mbr.bin kernel.bin
 	cat $^ > $@
 
 run: os-image.bin
-	qemu-system-i386 -fda $< -audiodev pa,id=speaker -machine pcspk-audiodev=speaker
+	qemu-system-i386 \
+		-m 512 \
+		-machine q35 \
+		-drive file=$<,format=raw,if=floppy \
+		-device usb-ehci,id=ehci \
+		-drive id=usbstick,file=usbstick.img,format=raw,if=none \
+		-device usb-storage,drive=usbstick \
+		-monitor stdio
 
 echo: os-image.bin
 	xxd $<

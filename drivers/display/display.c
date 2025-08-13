@@ -211,6 +211,13 @@ void print_string(char *string) {
     set_cursor(offset);
 }
 
+void print_hex(uint32_t num) {
+    char buf[9];
+    itoa(buf, num, 16);
+    print_string("0x");
+    print_string(buf);
+}
+
 void print_nl() {
     int newOffset = move_offset_to_new_line(get_cursor());
     if (newOffset >= MAX_ROWS * MAX_COLS * 2) {

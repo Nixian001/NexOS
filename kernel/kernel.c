@@ -5,6 +5,7 @@
 #include "../drivers/keyboard/keyboard.h"
 #include "../drivers/audio/audio.h"
 #include "../drivers/pci/pci.h"
+#include "../drivers/pci/pci_test.h"
 
 #include "util.h"
 #include "mem.h"
@@ -40,9 +41,6 @@ void main() {
     print_nl();
 
     // nexos_boot_audio();
-
-    pci_dev_t dev = pci_get_device(0x0951, 0x1666, 0x08);
-    print_int(pci_read(dev, 0x00));
 
     print_string("> ");
 }

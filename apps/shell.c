@@ -1,17 +1,22 @@
 #include "../drivers/display/display.h"
 #include "../kernel/util.h"
 #include "shell.h"
+#include "../drivers/pci/pci_test.h"
 
 void execute_command(char *input) {
     if (compare_string(input, "EXIT") == 0) {
         print_string("Stopping The CPU. Farewell! :3\n");
         asm volatile("hlt");
     }
-
+    else if (compare_string(input, "SCAN") == 0) {
+        scan_usb_controllers();
+    }
+    else if (compare_string(input, "SCANA") == 0) {
+        dump_pci_all();
+    }
     else if (compare_string(input, "CLS") == 0) {
         clear_screen();
     }
-
     else {
         print_string("Unknown command: ");
         print_string(input);
